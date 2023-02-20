@@ -1,0 +1,24 @@
+class Solution {
+    public int[] merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] arr = new int[m+n];
+        merge1(nums1,m,0,nums2,n,0,arr,0);
+        return arr;
+    }
+    public void merge1(int[] nums1, int m, int i, int[] nums2, int n, int j, int[] arr,int k) {
+        if(i==m) {
+            while(j<n){ arr[k++]=nums2[j++];}
+            return;
+        }
+        if(j==n) {
+           while(i<m){ arr[k++]=nums1[i++];}
+           return; 
+        } 
+        if(nums2[j]<nums1[i]){
+            arr[k++]=nums2[j++];
+            merge1(nums1,m,i,nums2,n,j,arr,k);
+        }
+        else{
+            arr[k++]=nums1[i++];
+            merge1(nums1,m,i,nums2,n,j,arr,k);
+        }
+    }
